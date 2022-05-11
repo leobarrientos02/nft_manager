@@ -62,7 +62,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  public onDeleteNft(nftId: any) {
+  public onDeleteNft(nftId: number) {
     this.nftService.deleteNft(nftId).subscribe(
       (response: void) => {
         console.log(response);
