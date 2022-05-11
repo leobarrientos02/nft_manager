@@ -61,7 +61,7 @@
 </div>
 
 <!-- Add nft Modal -->
-<div class="modal fade" id="addNftModal" tabindex="-1" role="dialog" aria-labelledby="addNftModalLabel" aria-hidden="true">
+<div class="modal fade" data-target="addModal" id="addNftModal" tabindex="-1" role="dialog" aria-labelledby="addNftModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
        <div class="modal-header">
@@ -94,7 +94,7 @@
          </div>
           <div class="modal-footer">
              <button type="button" id="add-nft-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save</button>
+             <button [disabled]="addForm.invalid" id="addNftBtn" type="submit" class="btn btn-primary">Save</button>
           </div>
           </form>
        </div>

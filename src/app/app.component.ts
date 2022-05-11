@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
     )
   }
 
-
   public onAddNft(addForm: NgForm): void {
     document.getElementById('add-nft')?.click();
     this.nftService.addNft(addForm.value).subscribe(
@@ -48,6 +47,7 @@ export class AppComponent implements OnInit {
         alert(error.message);
       },
     );
+    window.location.reload();
   }
 
   public onEditNft(nft: Nft): void {
