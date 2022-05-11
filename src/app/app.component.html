@@ -10,8 +10,7 @@
         </li>
      </ul>
      <form class="form-inline my-2 my-lg-0">
-        <input type="search"
-         name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search nft..." required>
+        <input type="search" (ngModelChange)="searchNft(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search nft..." required>
      </form>
   </div>
 </nav>
@@ -47,7 +46,7 @@
 					<div class="row">
 						<div class="col-md-12 col-sm-12 col-xs-12">
 							<button (click)="onOpenModal(nft, 'edit')" id="editBtn">Edit</button>
-							<button (click)="onOpenModal(nft, 'delete')"id="deleteBtn">Delete</button>
+							<button (click)="onOpenModal(nft, 'delete')" id="deleteBtn">Delete</button>
 						</div>
 					</div>
 				</div>
@@ -55,6 +54,10 @@
 		</div>
 	</div>
 	<!-- end product -->
+</div>
+
+<div class="footer">
+  <h2>Nft Manager</h2>
 </div>
 
 <!-- Add nft Modal -->
@@ -68,7 +71,7 @@
           </button>
        </div>
        <div class="modal-body">
-          <form #addForm="ngForm">
+          <form #addForm="ngForm" (ngSubmit)="onAddNft(addForm)">
           <div class="form-group">
              <label for="name">Name</label>
              <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
@@ -91,20 +94,20 @@
          </div>
           <div class="modal-footer">
              <button type="button" id="add-nft-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary">Save</button>
           </div>
           </form>
        </div>
     </div>
   </div>
-  </div>
+</div>
 
 <!-- Edit Modal -->
 <div class="modal fade" id="editNftModal" tabindex="-1" role="dialog" aria-labelledby="nftEditModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
      <div class="modal-content">
         <div class="modal-header">
-           <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Nft</h5>
+           <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Nft {{ editNft?.name }}</h5>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true">&times;</span>
            </button>
@@ -135,7 +138,7 @@
             </div>
               <div class="modal-footer">
                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                 <button data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                 <button (click)="onEditNft(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
               </div>
            </form>
         </div>
@@ -154,12 +157,20 @@
            </button>
         </div>
         <div class="modal-body">
-           <p>Are you sure you want to delete nft?</p>
+           <p>Are you sure you want to delete Nft {{ deleteNft?.name }}?</p>
            <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-              <button class="btn btn-danger" data-dismiss="modal">Yes</button>
+              <button (click)="onDeleteNft(deleteNft?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
            </div>
         </div>
      </div>
+  </div>
+</div>
+
+<!-- Notification for no employees -->
+<div *ngIf="nfts?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+  <div class="alert alert-info" role="alert">
+    <h4 class="alert-heading">NO EMPLOYEES!</h4>
+    <p>No Employees were found.</p>
   </div>
 </div>

@@ -15,7 +15,8 @@ export class AppComponent implements OnInit {
 
   public nft: any;
 
-  public editNft?: Nft;
+  public editNft!: Nft;
+  public deleteNft?: Nft;
 
   constructor(private nftService: NftService) { }
 
@@ -42,11 +43,9 @@ export class AppComponent implements OnInit {
       (response: Nft) => {
         console.log(response);
         this.getNft();
-        addForm.reset();
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
-        addForm.reset();
       },
     );
   }
@@ -63,6 +62,30 @@ export class AppComponent implements OnInit {
     );
   }
 
+  public onDeleteNft(nftId: any) {
+    this.nftService.deleteNft(nftId).subscribe(
+      (response: void) => {
+        console.log(response);
+        this.getNft();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      },
+    );
+  }
+
+  public searchNft(key: string): void {
+    const results: Nft[] = [];
+    for(const nft of this.nfts){
+      if(nft.name.toLowerCase().indexOf(key.toLowerCase()) !== -1){
+        results.push(nft);
+      }
+    }
+    this.nfts = results;
+    if(results.length === 0 || !key){
+      this.getNft();
+    }
+  }
 
   public onOpenModal(nft: Nft, mode: string): void {
     const container = document.getElementById("main-container");
@@ -78,6 +101,7 @@ export class AppComponent implements OnInit {
       this.editNft = nft;
     }
     if(mode === 'delete'){
+      this.deleteNft = nft;
       button.setAttribute('data-target', '#deleteNftModal');
     }
     container?.appendChild(button);

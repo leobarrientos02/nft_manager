@@ -331,6 +331,10 @@ img{
   }
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 #editBtn{
   margin-right: 1rem;
   border: none;
@@ -358,6 +362,10 @@ img{
   background: darkred;
 }
 
+.navbar-brand{
+  font-family: 'Lobster', cursive;
+}
+
 .nav-link{
   border: none;
   font-size: .9rem;
@@ -371,4 +379,14 @@ img{
 .nav-link:hover{
   border: violet 1px solid;
   color: violet;
+}
+
+.footer{
+  margin-top: 2rem;
+  width: 100%;
+  text-align: center;
+  padding: 2rem;
+  background: #3f4148;
+  color:white;
+  font-family: 'Lobster', cursive;
 }
